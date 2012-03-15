@@ -1,3 +1,10 @@
+phoneme-qml (1.0.2) stable; urgency=low
+
+  * Settings for anti-aliasing fonts and rotations.
+  * Bugfixes.
+
+ -- Kirill Chuvilin <kirill.chuvilin@gmail.com>  Thurs, 15 Mar 2012 12:49:00 +0400
+
 phoneme-qml (1.0.0) stable; urgency=low
 
   * The first stable public release.

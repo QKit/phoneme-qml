@@ -6,7 +6,7 @@
 *  All rights reserved.                                                        *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirik-ch.ru)           *
 *                                                                              *
-*  This file is part of the Folder Gallery project.                            *
+*  This file is part of the phoneME QML project.                               *
 *                                                                              *
 *  $QT_BEGIN_LICENSE:GPL$                                                      *
 *  You may use this file under the terms of the GNU General Public License     *
@@ -37,6 +37,8 @@ QKitDialog {
     signal installToggled() // emits when install button clicked
 
     QKitDialogText {
+        id: infoText
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -49,112 +51,75 @@ QKitDialog {
     QKitNavListView { // menu view
         id: view
 
-        property int __elementWidth: 0.9 * Math.min(addMidletDialog.width, addMidletDialog.height)
-        property int __buttonWidth: 0.2 * Math.min(addMidletDialog.width, addMidletDialog.height)
-        property int __buttonHeight: 0.5 * __buttonWidth
-
-        anchors.centerIn: parent
-        width: __elementWidth
-        height: Math.min(parent.height, childrenRect.height)
-        spacing: 0.5 * __buttonHeight
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: infoText.bottom
+        anchors.topMargin: (addMidletDialog.height - infoText.height - cText.height - height) / 2
+        width: 0.9 * Math.min(parent.width, parent.height)
+        height: 0.6 * width
+        spacing: 0.025 * width
         keyNavigationWraps: true
+
         model: VisualItemModel {
-            QKitRow {
-                controllerSource: addMidletDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: qsTr("JAR")
-                    onClicked: {
-                        selectFilePage.action = "jar"
-                        selectFilePage.mediaDir.nameFilters = ["*.jar"];
-                        selectFilePage.open()
-                    }
-                }
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    clip: true
-                    text: addMidletDialog.midletFile.jarSource != "file:" ? addMidletDialog.midletFile.jarSource : "..."
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideLeft
+            AddMidletDialogElement {
+                controllerSource: view
+                width: view.width
+                label: qsTr("JAR")
+                source: addMidletDialog.midletFile.jarSource
+                onButtonClicked: {
+                    selectFilePage.action = "jar"
+                    selectFilePage.mediaDir.nameFilters = ["*.jar"];
+                    selectFilePage.open()
                 }
             }
-            QKitRow {
-                controllerSource: addMidletDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: qsTr("JAD")
-                    onClicked: {
-                        selectFilePage.action = "jad";
-                        selectFilePage.mediaDir.nameFilters = ["*.jad"];
-                        selectFilePage.open();
-                    }
-                }
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    clip: true
-                    text: addMidletDialog.midletFile.jadSource != "file:" ? addMidletDialog.midletFile.jadSource : "..."
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideLeft
+            AddMidletDialogElement {
+                controllerSource: view
+                width: view.width
+                label: qsTr("JAD")
+                source: addMidletDialog.midletFile.jadSource
+                onButtonClicked: {
+                    selectFilePage.action = "jad"
+                    selectFilePage.mediaDir.nameFilters = ["*.jad"];
+                    selectFilePage.open()
                 }
             }
-            QKitRow {
-                controllerSource: addMidletDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: qsTr("Icon")
-                    onClicked: {
-                        selectFilePage.action = "icon"
-                        selectFilePage.mediaDir.nameFilters = ["*.png", "*.jpg", "*.gif", "*.bmp", "*.svg"];
-                        selectFilePage.open()
-                    }
-                }
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    clip: true
-                    text: addMidletDialog.midletFile.iconSource != "file:" ? addMidletDialog.midletFile.iconSource : "..."
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideLeft
+            AddMidletDialogElement {
+                controllerSource: view
+                width: view.width
+                label: qsTr("Icon")
+                source: addMidletDialog.midletFile.iconSource
+                onButtonClicked: {
+                    selectFilePage.action = "icon"
+                    selectFilePage.mediaDir.nameFilters = ["*.png", "*.jpg", "*.gif", "*.bmp", "*.svg"];
+                    selectFilePage.open()
                 }
             }
             QKitDialogText {
-                controllerSource: addMidletDialog
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: view.__elementWidth
-                font.pixelSize: 0.5 * view.__buttonHeight
+                controllerSource: view
+                width: view.width
+                height: 0.1 * width
+                font.pixelSize: 0.5 * height
                 text: addMidletDialog.midletFile.name + " " + addMidletDialog.midletFile.version
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideLeft
             }
-            QKitDialogButton {
-                controllerSource: addMidletDialog
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: 0.5 * view.__elementWidth
-                height: view.__buttonHeight
-                text: qsTr("Install")
-                onClicked: addMidletDialog.installToggled()
+            QKitItem {
+                controllerSource: view
+                width: view.width
+                height: 0.1 * width
+                QKitDialogButton {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0.25 * view.width
+                    anchors.right: parent.right
+                    anchors.rightMargin: 0.25 * view.width
+                    height: parent.height
+                    text: qsTr("Install")
+                    onClicked: addMidletDialog.installToggled()
+                }
             }
         }
     }
 
-    CText {}
+    CText {id: cText}
 
     SelectFilePage {
         id: selectFilePage

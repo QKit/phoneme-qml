@@ -6,7 +6,7 @@
 *  All rights reserved.                                                        *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirik-ch.ru)           *
 *                                                                              *
-*  This file is part of the Folder Gallery project.                            *
+*  This file is part of the phoneME QML project.                               *
 *                                                                              *
 *  $QT_BEGIN_LICENSE:GPL$                                                      *
 *  You may use this file under the terms of the GNU General Public License     *
@@ -33,8 +33,7 @@ QKitDialogText {
     anchors.bottom: parent.bottom
     textFormat: Text.RichText
     horizontalAlignment: Text.AlignHCenter
-    text: qsTr("by Kirill Chuvilin aka KiRiK for MaemoWorld.ru") + "<br />" + qsTr("This is free full-featured version of application. Please pay it at <a href=\"http://store.ovi.com/content/260534?clickSource=http://MaemoWorld.ru\" style=\"color:#FF0000\">Nokia Store</a> if you liked it or want it to be developed.")
-//    text: qsTr("by Kirill Chuvilin aka KiRiK for MaemoWorld.ru")
+    text: qsTr("by Kirill Chuvilin aka KiRiK for MaemoWorld.ru") + (application.isForStore ? "" : "<br />" + qsTr("This is free full-featured version of application. Please pay it at <a href=\"http://store.ovi.com/content/260534?clickSource=http://MaemoWorld.ru\" style=\"color:#FF0000\">Nokia Store</a> if you liked it or want it to be developed."))
     onLinkActivated: Qt.openUrlExternally(link)
     font.pixelSize: 0.035 * Math.min(parent.width, parent.height)
     wrapMode: Text.WordWrap

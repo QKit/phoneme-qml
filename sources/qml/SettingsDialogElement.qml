@@ -1,6 +1,6 @@
 /*******************************************************************************
 *                                                                              *
-*  Main item adaptor for Harmattan implementation.                             *
+*  Settings dialog element implementation.                                     *
 *                                                                              *
 *  Copyright (C) 2012 Kirill Chuvilin.                                         *
 *  All rights reserved.                                                        *
@@ -24,21 +24,38 @@
 *                                                                              *
 *******************************************************************************/
 
-import com.nokia.meego 1.0
+import Qt 4.7
 import "QKit"
 
-Window {
-    Main {
-        id: application
-        anchors.fill: parent
-        os: "Harmattan"
-        uiController: QKitUiController {
-            mouseHoverEnabled: false
-            buttonSmooth: true
-            thumbnailSmooth: false
-        }
-        keyController: QKitKeyController {
-            buttonPressKey: Qt.Key_Return
-        }
+QKitItem {
+    id: settingsDialogElement
+
+    property variant value // setting value
+    property string label // setting comment
+
+    signal buttonClicked() // on button clicked
+
+    height: Math.max(settingsDialogElementLabel.height, settingsDialogElementButton.height)
+
+    QKitDialogText {
+        id: settingsDialogElementLabel
+
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        width: 0.75 * parent.width
+        font.pixelSize: 0.5 * settingsDialogElementButton.height
+        text: settingsDialogElement.label
+        horizontalAlignment: Text.AlignLeft
+        wrapMode: Text.WordWrap
+    }
+    QKitDialogButton {
+        id: settingsDialogElementButton
+
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        width: 0.2 * parent.width
+        height: 0.5 * width
+        text: settingsDialogElement.value
+        onClicked: settingsDialogElement.buttonClicked()
     }
 }

@@ -6,7 +6,7 @@
 *  All rights reserved.                                                        *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirik-ch.ru)           *
 *                                                                              *
-*  This file is part of the Folder Gallery project.                            *
+*  This file is part of the phoneME QML project.                               *
 *                                                                              *
 *  $QT_BEGIN_LICENSE:GPL$                                                      *
 *  You may use this file under the terms of the GNU General Public License     *
@@ -35,12 +35,12 @@ QKitMenu {
 
     QKitMenuElement { // goto website button
         text: qsTr("Homepage")
-        onClicked: Qt.openUrlExternally(qsTr("https://github.com/QKit/phoneME-QML/wiki"))
+        onClicked: if (!application.isOnStoreQA) Qt.openUrlExternally(qsTr("https://github.com/QKit/phoneME-QML/wiki"))
     }
 
     QKitMenuElement { // goto website button
         text: qsTr("phoneME page")
-        onClicked: Qt.openUrlExternally(qsTr("http://davy.preuveneers.be/phoneme/?q=node/34"))
+        onClicked: if (!application.isOnStoreQA) Qt.openUrlExternally(qsTr("http://davy.preuveneers.be/phoneme/?q=node/34"))
     }
 
     QKitMenuElement { // goto website button

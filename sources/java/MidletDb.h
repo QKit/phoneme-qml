@@ -64,11 +64,19 @@ public:
      */
     QString getDirPath() const {return this->dir.absolutePath();}
 
+    /*!
+     * \brief Returns installed midlets list.
+     * \return list with pointers to midlet records
+     */
     const QList<MidletRecord*> &getMidlets() const {return this->m_midlets;}
+
+    /*!
+     * \brief Returns midlets property
+     * \return declarative list for midlets property
+     */
     QDeclarativeListProperty<MidletRecord> getMidletsProperty() {return DeclarativeList<MidletRecord>::generateProperty(this, &m_midlets, false, true);}
 
 public slots:
-
     /*!
      * \brief Sets absolute path to directory with thumbnail files.
      * \param dirPath string with path to directory with thumbnail files

@@ -6,7 +6,7 @@
 *  All rights reserved.                                                        *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirik-ch.ru)           *
 *                                                                              *
-*  This file is part of the Folder Gallery project.                            *
+*  This file is part of the phoneME QML project.                               *
 *                                                                              *
 *  $QT_BEGIN_LICENSE:GPL$                                                      *
 *  You may use this file under the terms of the GNU General Public License     *
@@ -27,10 +27,10 @@
 import "QKit"
 
 QKitLogController {
-    parentLogging: true
-//        createdLogging: true
-//        activeLogging: true
-//        selectedLogging: true
-//        activeFocusLogging: true
-//        focusLogging: true
+//    parentLogging: true
+//    createdLogging: true
+//    activeLogging: true
+//    selectedLogging: true
+//    activeFocusLogging: true
+//    focusLogging: true
 }

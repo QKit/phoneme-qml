@@ -6,7 +6,7 @@
 *  All rights reserved.                                                        *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirik-ch.ru)           *
 *                                                                              *
-*  This file is part of the Folder Gallery project.                            *
+*  This file is part of the phoneME QML project.                               *
 *                                                                              *
 *  $QT_BEGIN_LICENSE:GPL$                                                      *
 *  You may use this file under the terms of the GNU General Public License     *
@@ -29,14 +29,9 @@ import "QKit"
 
 Main {
     id: application
-//    width: 480
-//    height: 854
-    width: 854
-    height: 480
-//    width: 256
-//    height: 256
     os: "Desktop"
-//    os: "Harmattan"
+    width: 640
+    height: 480
     uiController: QKitUiController {
         mouseHoverEnabled: true
         buttonSmooth: true

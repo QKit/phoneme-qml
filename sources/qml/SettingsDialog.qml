@@ -6,7 +6,7 @@
 *  All rights reserved.                                                        *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirik-ch.ru)           *
 *                                                                              *
-*  This file is part of the Folder Gallery project.                            *
+*  This file is part of the phoneME QML project.                               *
 *                                                                              *
 *  $QT_BEGIN_LICENSE:GPL$                                                      *
 *  You may use this file under the terms of the GNU General Public License     *
@@ -34,9 +34,11 @@ QKitDialog {
 
     property Phoneme phoneme; // Phoneme object
 
+    property bool antialiasSettingValue // use anti-aliased fonts
     property bool bitmapfontSettingValue // use built-in bitmap font for faster text rendering
     property bool errorlogSettingValue // redirect all console output to log files in MyDocs
     property bool fullscreenSettingValue // start MIDlets in full screen
+    property bool rotateSettingValue // rotate midlet 90 degrees
     property bool sipSettingValue // enable virtual keyboard
 
     function saveValues() { // save all settings values to file
@@ -59,118 +61,80 @@ QKitDialog {
 
     QKitNavListView { // menu view
         id: view
-        property int __elementWidth: 0.9 * Math.min(parent.width, parent.height)
-        property int __buttonWidth: 0.2 * Math.min(parent.width, parent.height)
-        property int __buttonHeight: 0.5 * __buttonWidth
 
-        anchors.centerIn: parent
-        width: __elementWidth
-        height: Math.min(parent.height, childrenRect.height)
-        spacing: 0.5 * __buttonHeight
+        property int bodyHeight: Math.min(settingsDialog.height - cText.height, childrenRect.height)
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: (settingsDialog.height - cText.height - bodyHeight) / 2
+        anchors.bottom: cText.top
+        anchors.bottomMargin: (settingsDialog.height - cText.height - bodyHeight) / 2
+        width: 0.9 * Math.min(parent.width, parent.height)
+        spacing: 0.03 * width
         keyNavigationWraps: true
         model: VisualItemModel {
-            QKitRow {
+            SettingsDialogElement {
                 controllerSource: settingsDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    text: qsTr("Use built-in bitmap font for faster text rendering")
-                    horizontalAlignment: Text.AlignLeft
-                    wrapMode: Text.WordWrap
-                }
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: settingsDialog.bitmapfontSettingValue
-                    onClicked: settingsDialog.bitmapfontSettingValue = !settingsDialog.bitmapfontSettingValue
-                }
+                width: view.width
+                label: qsTr("Use anti-aliased fonts")
+                value: settingsDialog.antialiasSettingValue
+                onButtonClicked: settingsDialog.antialiasSettingValue = !settingsDialog.antialiasSettingValue
             }
-            QKitRow {
+            SettingsDialogElement {
                 controllerSource: settingsDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    text: qsTr("Redirect all console output to log files in MyDocs")
-                    horizontalAlignment: Text.AlignLeft
-                    wrapMode: Text.WordWrap
-                }
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: settingsDialog.errorlogSettingValue
-                    onClicked: settingsDialog.errorlogSettingValue = !settingsDialog.errorlogSettingValue
-                }
+                width: view.width
+                label: qsTr("Use built-in bitmap font for faster text rendering")
+                value: settingsDialog.bitmapfontSettingValue
+                onButtonClicked: settingsDialog.bitmapfontSettingValue = !settingsDialog.bitmapfontSettingValue
             }
-            QKitRow {
+            SettingsDialogElement {
                 controllerSource: settingsDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    text: qsTr("Start MIDlets in full screen")
-                    horizontalAlignment: Text.AlignLeft
-                    wrapMode: Text.WordWrap
-                }
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: settingsDialog.fullscreenSettingValue
-                    onClicked: settingsDialog.fullscreenSettingValue = !settingsDialog.fullscreenSettingValue
-                }
+                width: view.width
+                label: qsTr("Redirect all console output to log files in MyDocs")
+                value: settingsDialog.errorlogSettingValue
+                onButtonClicked: settingsDialog.errorlogSettingValue = !settingsDialog.errorlogSettingValue
             }
-            QKitRow {
+            SettingsDialogElement {
                 controllerSource: settingsDialog
-                width: view.__elementWidth
-                spacing: 0.05 * view.__elementWidth
-                QKitDialogText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - parent.spacing - view.__buttonWidth
-                    font.pixelSize: 0.5 * view.__buttonHeight
-                    text: qsTr("Enable virtual keyboard")
-                    horizontalAlignment: Text.AlignLeft
-                    wrapMode: Text.WordWrap
-                }
-                QKitDialogButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: view.__buttonWidth
-                    height: view.__buttonHeight
-                    text: settingsDialog.sipSettingValue
-                    onClicked: settingsDialog.sipSettingValue = !settingsDialog.sipSettingValue
-                }
+                width: view.width
+                label: qsTr("Start MIDlets in full screen")
+                value: settingsDialog.fullscreenSettingValue
+                onButtonClicked: settingsDialog.fullscreenSettingValue = !settingsDialog.fullscreenSettingValue
             }
-            QKitRow {
+            SettingsDialogElement {
                 controllerSource: settingsDialog
-                width: view.__elementWidth
-                height: view.__buttonHeight
-                spacing: 0.05 * view.__elementWidth
+                width: view.width
+                label: qsTr("Rotate midlet 90 degrees")
+                value: settingsDialog.rotateSettingValue
+                onButtonClicked: settingsDialog.rotateSettingValue = !settingsDialog.rotateSettingValue
+            }
+            SettingsDialogElement {
+                controllerSource: settingsDialog
+                width: view.width
+                label: qsTr("Enable virtual keyboard")
+                value: settingsDialog.sipSettingValue
+                onButtonClicked: settingsDialog.sipSettingValue = !settingsDialog.sipSettingValue
+            }
+            QKitItem {
+                controllerSource: settingsDialog
+                width: view.width
+                height: 0.1 * view.width
                 QKitDialogButton {
-                    controllerSource: settingsDialog
-                    width: 0.5 * (view.__elementWidth - parent.spacing)
-                    height: view.__buttonHeight
+                    anchors.left: parent.left
+                    width: 0.45 * parent.width
+                    height: 0.1 * parent.width
                     text: qsTr("Save")
                     onClicked: settingsDialog.saveValues()
                 }
                 QKitDialogButton {
-                    controllerSource: settingsDialog
-                    width: 0.5 * (view.__elementWidth - parent.spacing)
-                    height: view.__buttonHeight
+                    anchors.right: parent.right
+                    width: 0.45 * parent.width
+                    height: 0.1 * parent.width
                     text: qsTr("Reset")
                     onClicked: settingsDialog.resetValues()
                 }
             }
         }
     }
-
-    CText {}
+    CText {id: cText}
 }

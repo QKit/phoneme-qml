@@ -83,9 +83,11 @@ void Phoneme::setSettingValue(QString key, QString value) {
 
 bool Phoneme::loadSettings() {
     // default settings
+    Phoneme::s_settings["antialias"] = "true"; // settings: use anti-aliased fonts
     Phoneme::s_settings["fullscreen"] = "true"; // settings: start in full screen
     Phoneme::s_settings["bitmapfont"] = "false"; // settings: use built-in bitmap font for faster text rendering
     Phoneme::s_settings["errorlog"] = "false"; // settings: redirect all console output to log files in MyDocs
+    Phoneme::s_settings["rotate"] = "false"; // settings: rotate midlet 90 degrees
     Phoneme::s_settings["sip"] = "true"; // settings: enable virtual keyboard
     // try to load
     QFile settingsFile(this->s_settingsPath); // settings file

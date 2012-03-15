@@ -1,6 +1,6 @@
 /*******************************************************************************
 *                                                                              *
-*  Main item adaptor for Harmattan implementation.                             *
+*  Midlet installation dialog element implementation.                          *
 *                                                                              *
 *  Copyright (C) 2012 Kirill Chuvilin.                                         *
 *  All rights reserved.                                                        *
@@ -24,21 +24,35 @@
 *                                                                              *
 *******************************************************************************/
 
-import com.nokia.meego 1.0
+import Qt 4.7
 import "QKit"
 
-Window {
-    Main {
-        id: application
-        anchors.fill: parent
-        os: "Harmattan"
-        uiController: QKitUiController {
-            mouseHoverEnabled: false
-            buttonSmooth: true
-            thumbnailSmooth: false
-        }
-        keyController: QKitKeyController {
-            buttonPressKey: Qt.Key_Return
-        }
+QKitItem {
+    id: addMidletDialogElement
+
+    property url source // file url
+    property string label // label of file
+
+    signal buttonClicked() // on button clicked
+
+    height: 0.1 * width
+
+    QKitDialogButton {
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        width: 0.2 * parent.width
+        height: parent.height
+        text: addMidletDialogElement.label
+        onClicked: addMidletDialogElement.buttonClicked()
+    }
+    QKitDialogText {
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        width: 0.75 * parent.width
+        font.pixelSize: 0.5 * parent.height
+        clip: true
+        text: addMidletDialogElement.source != "file:" ? addMidletDialogElement.source : "..."
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideLeft
     }
 }

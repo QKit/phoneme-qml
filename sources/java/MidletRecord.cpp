@@ -129,7 +129,7 @@ void MidletRecord::saveMidletDesktopFile() const {
     outStream << "Type=Application\n";
     outStream << "Terminal=false\n";
     outStream << "Name=" << this->getName() << "\n";
-    outStream << "Exec=" << this->getExecCommand() << "\n";
+    outStream << "Exec=" << "/opt/phoneme-qml/bin/phoneme-qml --execmidlet --id " << this->getId() << "\n";
 #if defined(Q_WS_MAEMO_5)
     outStream << "Icon=" << QFileInfo(this->getIconPath()).baseName() << "\n";
 #elif defined(Q_WS_HARMATTAN)

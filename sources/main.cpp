@@ -37,6 +37,22 @@
 #include "java/MidletDb.h"
 
 int main(int argc, char *argv[]) {
+    QStringList consoleParams; // params from console
+    for (int iArg = 1; iArg < argc; iArg++)
+        consoleParams.append(QString(argv[iArg]));
+
+    if (consoleParams.length() > 0 && consoleParams.at(0) == "--execmidlet") {
+        if (consoleParams.length() > 1 && consoleParams.at(1) == "--id") {
+            if (consoleParams.length() > 2) {
+                int id = consoleParams.at(2).toInt();
+                MidletDb midletDb;
+                foreach (const MidletRecord* midletRecord, midletDb.getMidlets()) {
+                    if (midletRecord->getId() == id) return midletRecord->exec();
+                }
+            }
+        }
+    }
+
     QApplication app(argc, argv);
     QmlApplicationViewer viewer;
 
