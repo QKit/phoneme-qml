@@ -34,13 +34,13 @@ QKitMenu {
     signal settingsToggled() // emits when settings button clicked
 
     QKitMenuElement { // goto website button
-        text: application.isOnStoreQA ? qsTr("Back") : qsTr("Homepage")
-        onClicked: if (!application.isOnStoreQA) Qt.openUrlExternally(qsTr("https://github.com/QKit/phoneME-QML/wiki"))
+        text: qsTr("Homepage")
+        onClicked: Qt.openUrlExternally(application.externalUrl('homepage'));
     }
 
     QKitMenuElement { // goto website button
-        text: application.isOnStoreQA ? qsTr("Back") : qsTr("phoneME page")
-        onClicked: if (!application.isOnStoreQA) Qt.openUrlExternally(qsTr("http://davy.preuveneers.be/phoneme/?q=node/34"))
+        text: qsTr("phoneME page")
+        onClicked: Qt.openUrlExternally(application.externalUrl("phonemepage"))
     }
 
     QKitMenuElement { // goto website button

@@ -36,7 +36,11 @@ QKitApplication {
     property Phoneme phoneme: Phoneme {}
 
     property bool isForStore: false
-    property bool isOnStoreQA: isForStore && (new Date <= new Date(2012,03,22))
+    property string version: "1.0.4"
+
+    function externalUrl(link) {
+        return "http://scripts.kirik-ch.ru/appredirect.php?app=phoneme-qml&link=" + link +"&platform=" + os + "&version=" + version + (isForStore ? "&isforstore=true" : "");
+    }
 
     logController: LogController { }
 

@@ -1,3 +1,9 @@
+phoneme-qml (1.0.4) stable; urgency=low
+
+  * External urls fix.
+
+ -- Kirill Chuvilin <kirill.chuvilin@gmail.com>  Fri, 16 Mar 2012 18:35:00 +0400
+
 phoneme-qml (1.0.3) stable; urgency=low
 
   * Settings fix.
