@@ -42,18 +42,22 @@ QKitDialog {
     property bool sipSettingValue // enable virtual keyboard
 
     function saveValues() { // save all settings values to file
+        phoneme.setSettingValue("antialias", antialiasSettingValue ? "true" : "false");
         phoneme.setSettingValue("bitmapfont", bitmapfontSettingValue ? "true" : "false");
         phoneme.setSettingValue("errorlog", errorlogSettingValue ? "true" : "false");
         phoneme.setSettingValue("fullscreen", fullscreenSettingValue ? "true" : "false");
+        phoneme.setSettingValue("rotate", rotateSettingValue ? "true" : "false");
         phoneme.setSettingValue("sip", sipSettingValue ? "true" : "false");
         phoneme.saveSettings();
         active = false;
     }
 
     function resetValues() { // reset all settings values to loaded from file
+        antialiasSettingValue = phoneme.getSettingValue("antialias") === "true";
         bitmapfontSettingValue = phoneme.getSettingValue("bitmapfont") === "true";
         errorlogSettingValue = phoneme.getSettingValue("errorlog") === "true";
         fullscreenSettingValue = phoneme.getSettingValue("fullscreen") === "true";
+        rotateSettingValue = phoneme.getSettingValue("rotate") === "true";
         sipSettingValue = phoneme.getSettingValue("sip") === "true";
     }
 

@@ -35,7 +35,7 @@ QKitApplication {
     property MidletDb midletDb: MidletDb {}
     property Phoneme phoneme: Phoneme {}
 
-    property bool isForStore: true
+    property bool isForStore: false
     property bool isOnStoreQA: isForStore && (new Date <= new Date(2012,03,22))
 
     logController: LogController { }

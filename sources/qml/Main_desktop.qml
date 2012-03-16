@@ -30,7 +30,7 @@ import "QKit"
 Main {
     id: application
     os: "Desktop"
-    width: 640
+    width: 854
     height: 480
     uiController: QKitUiController {
         mouseHoverEnabled: true
